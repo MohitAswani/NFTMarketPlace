@@ -69,6 +69,11 @@
 
 * The sender address is usually the 1st account of the 20 dummy accounts.
 
+* Marketplace contract needs to keep track of each of the NFTs that are being sold.
+
+* For that we use a Item struct and a items mapping which maps the itemId to the item struct.
+
+* When we call makeItem function we transfer the nft from the sender address to the marketplace contract. And create a new mapping entry and emit an event.
 ## Testing our smart contracts :
 
 * Each time we include a new functionality into our project we need to test it. We can do it using the hardhat console but thats extremely time consuming. So we use automated tests.
@@ -78,3 +83,5 @@
 * Hardhat allows us to write and test our code. All our tests are in the `tests` in backend folder.
 
 * We will be writing the tests in js using the waffle testing framework provided to us by hardhat. And in addition to waffle we will also be using chai to assert our tests.
+
+* To run the tests we write in the test folder we run : `npx hardhat test`.
