@@ -37,6 +37,16 @@ contract Marketplace is ReentrancyGuard{
         address indexed seller
     );
 
+    // Buyer set as indexed so as to search all the bought events using buyers id.
+    event Bought(
+        uint itemId,
+        address indexed nft,
+        uint tokenId,
+        uint price,
+        address indexed seller,
+        address indexed buyer
+    );
+
     // We need a DS which can keep track of all the items and we use a mapping for that.
     // Mapping will have itemId->Item
     mapping(uint=>Item) public items;
@@ -51,7 +61,7 @@ contract Marketplace is ReentrancyGuard{
     // We add the nonReentrant modifier which comes from the ReentrancyGuard interface.
     // And this modifier prevent this function from being called before the first call to this function is finished.
     function makeItem(IERC721 _nft,uint _tokenId,uint _price) external nonReentrant{
-        require(_price>=0,"Price must be greater than zero");
+        require(_price>0,"Price must be greater than zero");
 
         // incrementing itemCount
         itemCount++;
@@ -73,5 +83,40 @@ contract Marketplace is ReentrancyGuard{
 
         // We also want to emit an event Offered.
         emit Offered(itemCount, address(_nft), _tokenId, _price, msg.sender);
+    }
+
+    // Will take in the itemid of the item which is to be purchased and then we also make it payable so that the user who is calling this function can also transfer ether with it.
+    function purchaseItem(uint _itemId) external payable nonReentrant{
+        uint _totalPrice=getTotalPrice(_itemId);
+
+        // We add storage to it so as to say that this variable is directly reference the item from memory and not creating a copy of the data.
+        Item storage item = items[_itemId];
+
+        // We make sure that the item id is valid.
+        require(_itemId>0&&_itemId<=itemCount,"item doesn't exist");
+        // We make sure the ether sent with function call is enough
+        require(msg.value==_totalPrice,"not enough ether to cover item price and market fee");
+        // We make sure that the item is not sold
+        require(!item.sold,"Item already sold!");
+
+        // Pay the seller and feeAccount
+        item.seller.transfer(item.price);
+        feeAccount.transfer(_totalPrice-item.price);
+
+        // Update the item to sold
+        item.sold=true;
+
+        // transfer nft to buyer
+        item.nft.transferFrom(address(this), msg.sender, item.tokenId);
+
+        // Emit a bought event
+        emit Bought(_itemId, address(item.nft), item.tokenId, item.price, item.seller, msg.sender);
+    }
+
+    // This function will get the final price of the item which is the price set by the seller and the purchase fee.
+    // Also this variable is view because it not modifying any of the state variables.
+    // We will set it to public because we need to also call this function in the frontend.
+    function getTotalPrice(uint _itemId) view public returns(uint){
+        return (items[_itemId].price*(100+feePercent)/100);
     }
 }

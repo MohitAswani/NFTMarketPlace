@@ -8,9 +8,9 @@
 
 * We install the ipfs-http-client so as to upload the content of the NFT to ipfs (which is a decentralized file system) before we mint it.
 
-* Install open zeppelin contract library which is a library secure and pre-built contracts that devs can import the contracts into their projects.
+* Install open zeppelin contract library which is a library of secure and pre-built contracts that devs can import the contracts into their projects.
 
-* We use open zeppelin contract to import ERC-721 NFT standard.
+* We use open zeppelin contracts to import ERC-721 NFT standard.
 
 * Install open zeppelin using : `npm i @openzeppelin/contracts@4.5.0`.
 
@@ -28,11 +28,11 @@
 
 * The frontend is the react app.
 
-* We using bootstrap in the frontend to
+* We will be using bootstrap in the frontend.
 
 ## NFT Smart contract :
 
-* The ERC721 standard defines a set of all function that a NFT contract should have at bare minimum. This standard was created so that all the dApps are compatible with it.
+* The ERC721 standard defines a set of functions that a NFT contract should have at bare minimum. This standard was created so that all the dApps are compatible with it.
 
 * And we import the URI storage smart contract.
 
@@ -74,13 +74,14 @@
 * For that we use a Item struct and a items mapping which maps the itemId to the item struct.
 
 * When we call makeItem function we transfer the nft from the sender address to the marketplace contract. And create a new mapping entry and emit an event.
+
 ## Testing our smart contracts :
 
 * Each time we include a new functionality into our project we need to test it. We can do it using the hardhat console but thats extremely time consuming. So we use automated tests.
 
 * Tests are more important becuase once a smart contract is deployed to the blockchain it is not possible to modify it and hence error are very costly. And hence we must robustly test our smart contracts.
 
-* Hardhat allows us to write and test our code. All our tests are in the `tests` in backend folder.
+* Hardhat allows us to write and test our code. All our tests are in the `test` in backend folder.
 
 * We will be writing the tests in js using the waffle testing framework provided to us by hardhat. And in addition to waffle we will also be using chai to assert our tests.
 

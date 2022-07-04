@@ -8,11 +8,11 @@ async function main() {
 
   // This line fetches the contract factory which is used to deploy the NFT.
   // We call this method on the ethers object which is inject into our dev enviroment by hardhat.
-  // ethers is a library which is used to communicate with eth node.
+  // ethers is a library which is used to communicate with ethereum nodes.
   // Then we pass in the name of contract we want to deploy.
   const NFT = await ethers.getContractFactory("NFT");
 
-  // We call the deploy on the factory to fetch the deployed copy of the NFT.
+  // We call the deploy on the factory to deply the contract and fetch the deployed copy of the NFT.
   const nft = await NFT.deploy();
 
   const Marketplace = await ethers.getContractFactory("Marketplace");
