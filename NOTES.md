@@ -86,3 +86,10 @@
 * We will be writing the tests in js using the waffle testing framework provided to us by hardhat. And in addition to waffle we will also be using chai to assert our tests.
 
 * To run the tests we write in the test folder we run : `npx hardhat test`.
+
+## Frontend :
+
+* We import ether.js library to our App.js file and this will allow us to talk to ethereum nodes. And we have already used it to connect to our local blockchain.
+
+* Ethers is going to connect to metamask and metamask is already connected to blockchain. Basically ethereum is going to connect to web 3 provides which is what metamask uses to connect to websites.
+
