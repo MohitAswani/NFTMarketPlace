@@ -1,3 +1,4 @@
+require("dotenv").config();
 require("@nomiclabs/hardhat-waffle");
 
 module.exports = {
@@ -8,4 +9,10 @@ module.exports = {
     cache: "./src/backend/cache",
     tests: "./src/backend/test"
   },
+  networks:{
+    goerli:{
+      url:process.env.GOERLI_INFURA_URL,
+      accounts:[process.env.METAMASK_PRIVATE_KEY]
+    }
+  }
 };
