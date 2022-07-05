@@ -53,7 +53,7 @@ function App() {
 
   useEffect(() => {
     web3Handler();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <BrowserRouter>
