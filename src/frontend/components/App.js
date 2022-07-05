@@ -14,9 +14,6 @@ import MyPurchases from "./MyPurchases";
 import { Spinner } from "react-bootstrap";
 
 function App() {
-  useEffect(() => {
-    document.title = 'NFT marketplace';
-  });
   const [loading, setLoading] = useState(true);
   const [account, setAccount] = useState(null);
   const [nft, setNFT] = useState({});
