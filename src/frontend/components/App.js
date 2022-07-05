@@ -78,8 +78,26 @@ function App() {
               path="/create"
               element={<Create marketplace={marketplace} nft={nft} />}
             />
-            <Route path="/my-listed-items" />
-            <Route path="/my-purchases" />
+            <Route
+              path="/my-listed-items"
+              element={
+                <MyListedItems
+                  marketplace={marketplace}
+                  nft={nft}
+                  account={account}
+                />
+              }
+            />
+            <Route
+              path="/my-purchases"
+              element={
+                <MyPurchases
+                  marketplace={marketplace}
+                  nft={nft}
+                  account={account}
+                />
+              }
+            />
           </Routes>
         )}
       </div>
