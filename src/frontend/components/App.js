@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navigation from "./Navbar";
-import { useState} from "react";
+import { useState,useEffect} from "react";
 import { ethers } from "ethers";
 import MarketplaceAbi from "../contractsData/Marketplace.json";
 import MarketplaceAddress from "../contractsData/Marketplace-address.json";
@@ -50,6 +50,10 @@ function App() {
     setNFT(nft);
     setLoading(false);
   };
+
+  useEffect(() => {
+    web3Handler();
+  }, []);
 
   return (
     <BrowserRouter>
