@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navigation from "./Navbar";
-import { useState,useEffect } from "react";
+import { useState} from "react";
 import { ethers } from "ethers";
 import MarketplaceAbi from "../contractsData/Marketplace.json";
 import MarketplaceAddress from "../contractsData/Marketplace-address.json";
